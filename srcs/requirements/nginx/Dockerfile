@@ -1,10 +1,11 @@
-# syntax=docker/dockerfile:1
+#syntax=docker/dockerfile:1
 
-FROM debian:stable-slim
+FROM debian:oldstable-slim
 
-WORKDIR /data/www
+COPY tools/init_nginx.sh .
 
-RUN apt-get update && apt-get -y install nginx
+RUN bash init_nginx.sh
 
-CMD [ "nginx" ]
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
+CMD ["nginx"]
