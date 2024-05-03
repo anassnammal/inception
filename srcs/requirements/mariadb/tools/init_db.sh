@@ -1,7 +1,6 @@
 #!/bin/bash
 
 STEPS=(
-    "RUN apt-get update && apt-get install mariadb-server -y && apt-get clean && rm -rf /var/lib/apt/lists/*"
     "service mysql start"
     "mysql -e \"CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;\""
     "mysql -e \"CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';\""
