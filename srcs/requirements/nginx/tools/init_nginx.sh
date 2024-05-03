@@ -16,3 +16,5 @@ do
         exit $?
     fi
 done
+
+rm -rf $0

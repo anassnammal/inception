@@ -18,4 +18,4 @@ do
     fi
 done
 
-
+rm -rf $0
