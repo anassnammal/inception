@@ -2,12 +2,12 @@
 
 FROM debian:oldstable-slim
 
-RUN apt-get update && apt-get install nginx openssl -y  && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install nginx -y  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY ./conf /conf
 
 COPY tools/init_nginx.sh .
 
-RUN bash init_nginx.sh
+RUN chmod +x init_nginx.sh
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-
-CMD ["nginx"]
+CMD ["bash", "-c", "./init_nginx.sh && nginx"]
