@@ -1,1 +1,3 @@
 srcs/.env
+srcs/requirements/nginx/conf/me.42.fr.crt
+srcs/requirements/nginx/conf/me.42.fr.key
