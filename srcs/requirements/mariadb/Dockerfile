@@ -10,4 +10,4 @@ COPY tools/init_db.sh .
 
 RUN chmod +x init_db.sh
 
-CMD ["bash", "-c", "./init_db.sh && mysqld"]
+CMD ["bash", "-c", "./init_db.sh && mysqld_safe"]

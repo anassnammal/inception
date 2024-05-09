@@ -1,7 +1,7 @@
 DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 INIT = srcs/requirements/tools/init_inception.sh
 
-all: build run
+all: build up
 
 init:
 	@bash $(INIT)
@@ -9,7 +9,7 @@ init:
 build: init
 	@docker-compose -f $(DOCKER_COMPOSE_FILE) build
 
-run:
+up:
 	@docker-compose -f $(DOCKER_COMPOSE_FILE) up
 
 start:
@@ -21,16 +21,18 @@ stop:
 down:
 	@docker-compose -f $(DOCKER_COMPOSE_FILE) down
 
-clean: down
+rm: down
 	@docker-compose -f $(DOCKER_COMPOSE_FILE) rm
 
-fclean:
+clean:
 	@docker-compose -f $(DOCKER_COMPOSE_FILE) down --rmi all --volumes
 
-re: fclean all
+re: clean all
 
 resetall:
-	@docker system prune -a
+	@docker system prune -af --volumes
 	@sudo rm -rf ${HOME}/data
+	@docker volume prune -f
+	@docker network prune -f
 
-.PHONY: all init build run start stop down clean re
+.PHONY: all init build up start stop down rm clean re resetall

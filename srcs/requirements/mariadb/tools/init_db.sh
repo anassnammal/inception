@@ -6,7 +6,7 @@
 #    By: anammal <anammal@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 17:34:22 by anammal           #+#    #+#              #
-#    Updated: 2024/05/08 18:53:30 by anammal          ###   ########.fr        #
+#    Updated: 2024/05/09 21:16:02 by anammal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,21 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Function to stop the mariadb service
+stop_mariadb() {
+    service mariadb stop
+    exit 0
+}
+
+# Trap the SIGTERM signal to stop the mariadb service
+trap 'stop_mariadb' SIGTERM
+
+# check if the database is already initialized
+if [ -d /var/lib/mysql/${MYSQL_DATABASE} ]; then
+    echo "Database is already exist!"
+    exit 0
+fi
+
 # start the mariadb service
 service mariadb start
 
@@ -25,14 +40,7 @@ service mariadb start
 echo "Waiting for the mariadb service to be fully ready..."
 sleep 5
 
-# check if the database is already initialized
-if [ -f /var/lib/mysql/initialized ]; then
-    echo "Database is already initialized"
-    exit 0
-fi
-
 ## this part is a set of SQL commands passed to db via "mysql -e" command
-
 # create the database
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;"
 

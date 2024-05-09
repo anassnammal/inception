@@ -6,15 +6,13 @@
 #    By: anammal <anammal@student.1337.ma>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/08 17:25:05 by anammal           #+#    #+#              #
-#    Updated: 2024/05/08 17:28:34 by anammal          ###   ########.fr        #
+#    Updated: 2024/05/09 21:15:15 by anammal          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/bash
 
-
 ####### This script is used to initialize and configure the nginx server #######
-
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -44,3 +42,8 @@ mkdir -p /var/run/nginx
 # set the appropriate permissions for nginx
 chmod 0755 /var/www/wordpress
 chown -R www-data:www-data /var/www/wordpress
+
+# start the nginx server
+echo "Nginx server is running... 🚀"
+echo "listening on port 443"
+nginx

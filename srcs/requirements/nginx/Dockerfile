@@ -8,6 +8,4 @@ COPY ./conf /conf
 
 COPY tools/init_nginx.sh .
 
-RUN chmod +x init_nginx.sh
-
-CMD ["bash", "-c", "./init_nginx.sh && nginx"]
+CMD ["bash", "init_nginx.sh"]
