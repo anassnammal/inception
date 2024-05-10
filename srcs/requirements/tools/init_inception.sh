@@ -29,6 +29,11 @@ gen_env() {
     read -p "Enter your wordpress user name: " WP_USER && echo "WP_USER=$WP_USER" >> $ENV_PATH
     read -p "Enter your wordpress user email: " WP_USER_EMAIL && echo "WP_USER_EMAIL=$WP_USER_EMAIL" >> $ENV_PATH
     read -p "Enter your wordpress user password: " WP_USER_PASSWORD && echo "WP_USER_PASSWORD=$WP_USER_PASSWORD" >> $ENV_PATH
+    echo "# REDIS SETUP" >> $ENV_PATH
+    read -p "Enter your redis password: " REDIS_PASSWORD && echo "REDIS_PASSWORD=$REDIS_PASSWORD" >> $ENV_PATH
+    echo "# FTP SETUP" >> $ENV_PATH
+    read -p "Enter your ftp user name: " FTP_USER && echo "FTP_USER=$FTP_USER" >> $ENV_PATH
+    read -p "Enter your ftp password: " FTP_PASSWORD && echo "FTP_PASSWORD=$FTP_PASSWORD" >> $ENV_PATH
 }
 
 # Check if the .env file exists, if not, generate it

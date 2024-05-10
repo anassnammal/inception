@@ -25,6 +25,17 @@ export WP_CLI_CACHE_DIR=$(pwd)/.wp-cli/cache
 # create a new user
 ./wp-cli.phar user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PASSWORD
 
+# install redis cache plugin
+./wp-cli.phar plugin install redis-cache --activate
+
+# configure redis cache plugin
+./wp-cli.phar config set WP_REDIS_HOST redis
+./wp-cli.phar config set WP_REDIS_PORT 6379
+./wp-cli.phar config set WP_REDIS_PASSWORD $REDIS_PASSWORD
+
+# enable redis cache plugin
+./wp-cli.phar redis enable
+
 # create a file to indicate that the initialization is done
 touch .initialized
 
